@@ -281,7 +281,7 @@ PerformanceLab.modules.notebook = {
         a = document.createElement("a");
       a.href = url;
       a.download =
-        "diescope-experiments-" +
+        "core-and-warp-experiments-" +
         new Date().toISOString().slice(0, 10) +
         ".json";
       a.click();

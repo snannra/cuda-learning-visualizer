@@ -1,6 +1,6 @@
 # CUDA Learning Visualizer
 
-A static educational platform for CPU/GPU architecture, CUDA matrix multiplication and performance reasoning. The interface is branded DieScope; the project folder is `cuda-learning-visualizer`. No GPU, backend, bundler or third-party runtime packages are required.
+A static educational platform for CPU/GPU architecture, CUDA matrix multiplication and performance reasoning. The interface is branded Core & Warp; the project folder is `cuda-learning-visualizer`. No GPU, backend, bundler or third-party runtime packages are required.
 
 ## Run
 

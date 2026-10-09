@@ -156,3 +156,51 @@
     gap: 16px;
   }
 }
+/* Core & Warp: a processor core joined to three parallel execution paths. */
+.site-header .site-brand {
+  gap: 10px;
+}
+.brand-mark {
+  display: block;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+.brand-name {
+  font-size: 24px;
+  letter-spacing: -1px;
+}
+.brand-amp {
+  color: #72e4cf;
+  font-style: normal;
+  font-weight: 500;
+  margin: 0 5px;
+}
+.brand-sub {
+  margin-left: 10px;
+}
+@media (min-width: 651px) and (max-width: 900px) {
+  .brand-mark {
+    width: 26px;
+    height: 26px;
+  }
+  .brand-name {
+    font-size: 17px;
+    letter-spacing: -0.8px;
+  }
+  .site-header .site-brand {
+    gap: 6px;
+  }
+  .brand-amp {
+    margin: 0 3px;
+  }
+}
+@media (max-width: 650px) {
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+  }
+  .brand-name {
+    font-size: 22px;
+  }
+}

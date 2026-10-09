@@ -3,15 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>DieScope</title>
+    <title>Matrix Lab · Core &amp; Warp</title>
     <meta
       name="description"
       content="Step through CUDA matrix multiplication, threads, tiles, shared memory and barriers."
     />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d1524'/%3E%3Cpath d='M7 7h7v7H7zm11 0h7v7h-7zM7 18h7v7H7zm11 0h7v7h-7z' fill='%235ee6bd'/%3E%3C/svg%3E"
-    />
+    <link rel="icon" href="assets/img/core-and-warp-mark.svg" />
     <link rel="stylesheet" href="assets/css/walkthrough.css" />
     <link rel="stylesheet" href="assets/css/navigation.css" />
     <link rel="stylesheet" href="assets/css/theme.css" />
@@ -20,9 +17,15 @@
 
   <body>
     <header class="site-header">
-      <a class="site-brand" href="index.html"
-        ><span class="brand-name"
-          >DIE<span class="brand-slash">/</span>SCOPE</span
+      <a class="site-brand" href="index.html" aria-label="Core &amp; Warp home"
+        ><img
+          class="brand-mark"
+          src="assets/img/core-and-warp-mark.svg"
+          width="36"
+          height="36"
+          alt=""
+        /><span class="brand-name"
+          >CORE<span class="brand-amp">&amp;</span>WARP</span
         ><span class="brand-sub">COMPUTER ARCHITECTURE</span></a
       >
       <nav class="page-tabs" aria-label="Main navigation">
@@ -202,7 +205,7 @@
         class="blocking-embed"
         aria-label="Register blocking experiment"
       ></section>
-      <footer>DieScope · Learn the data movement, then optimize.</footer>
+      <footer>Core &amp; Warp · Learn the data movement, then optimize.</footer>
     </main>
     <script src="assets/js/models/matmul.js"></script>
     <script src="assets/js/walkthrough.js"></script>
