@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>DieScope</title>
+    <meta
+      name="description"
+      content="Step through CUDA matrix multiplication, threads, tiles, shared memory and barriers."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d1524'/%3E%3Cpath d='M7 7h7v7H7zm11 0h7v7h-7zM7 18h7v7H7zm11 0h7v7h-7z' fill='%235ee6bd'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="assets/css/walkthrough.css" />
+    <link rel="stylesheet" href="assets/css/navigation.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/phase3.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a class="site-brand" href="index.html"
+        ><span class="brand-name"
+          >DIE<span class="brand-slash">/</span>SCOPE</span
+        ><span class="brand-sub">COMPUTER ARCHITECTURE</span></a
+      >
+      <nav class="page-tabs" aria-label="Main navigation">
+        <a href="index.html">Overview</a
+        ><a href="architecture.html">Architecture</a
+        ><a href="matmul.html" class="active" aria-current="page">Matrix lab</a
+        ><a href="grid.html">Grid canvas</a
+        ><a href="performance.html">Performance lab</a>
+      </nav>
+    </header>
+    <main>
+      <div class="intro">
+        <h1>See the multiplication.</h1>
+        <p>
+          Follow a thread from global memory to its final output. Small matrices
+          make every operation visible.
+        </p>
+      </div>
+      <nav aria-label="Algorithm">
+        <button data-mode="tiled" class="active">
+          01 · Shared-memory tiling</button
+        ><button data-mode="naive">02 · Naive CUDA</button
+        ><button data-mode="cpu">03 · Sequential CPU</button
+        ><a class="blocking-tab" href="#register-blocking"
+          >04 · Register blocking</a
+        >
+      </nav>
+      <section class="controls">
+        <label
+          >Matrix size N<select id="size">
+            <option>4</option>
+            <option selected>6</option>
+            <option>8</option>
+            <option>16</option>
+          </select></label
+        ><label
+          >Tile width<select id="tile">
+            <option selected>2</option>
+            <option>4</option>
+            <option>16</option>
+          </select></label
+        ><label
+          >Input values<select id="pattern">
+            <option value="small">Small integers</option>
+            <option value="identity">B = identity</option>
+            <option value="ones">All ones</option>
+          </select></label
+        ><label
+          >Playback speed<select id="speed">
+            <option value="1200">Slow</option>
+            <option value="600" selected>Normal</option>
+            <option value="180">Fast</option>
+          </select></label
+        ><button id="reset">Reset</button>
+      </section>
+      <div class="workspace">
+        <section class="panel matrices">
+          <div class="section-title">
+            <h2>Global memory</h2>
+            <span>Click an output cell to follow its thread</span>
+          </div>
+          <div class="matrix-row">
+            <div>
+              <h3><i class="a-dot"></i>A <small>row-major</small></h3>
+              <div id="A" class="matrix"></div>
+            </div>
+            <b class="operator">×</b>
+            <div>
+              <h3><i class="b-dot"></i>B <small>row-major</small></h3>
+              <div id="B" class="matrix"></div>
+            </div>
+            <b class="operator">=</b>
+            <div>
+              <h3><i class="c-dot"></i>C <small>block output</small></h3>
+              <div id="C" class="matrix"></div>
+            </div>
+          </div>
+          <div class="legend">
+            <span class="a-key">A operand</span
+            ><span class="b-key">B operand</span
+            ><span class="tile-key">Active tile / block</span
+            ><span class="c-key">Selected output</span>
+          </div>
+          <div id="index" class="index"></div>
+        </section>
+        <aside class="panel">
+          <div class="section-title">
+            <h2>Thread inspector</h2>
+            <span id="thread"></span>
+          </div>
+          <div id="phase" class="phase"></div>
+          <p id="explain"></p>
+          <div class="sum">
+            <span>REGISTER · sum</span><strong id="sum">0</strong>
+          </div>
+          <div id="equation" class="equation"></div>
+          <div class="transport">
+            <button id="back" aria-label="Previous step">Back</button
+            ><button id="play" class="primary">Play</button
+            ><button id="next">Step</button>
+          </div>
+          <label class="timeline-label"
+            >Execution progress<input
+              id="timeline"
+              type="range"
+              min="0"
+              value="0"
+          /></label>
+          <div id="progress" class="muted"></div>
+        </aside>
+        <section class="panel shared">
+          <div class="section-title">
+            <h2>Block shared memory</h2>
+            <span id="shared-meta"></span>
+          </div>
+          <div id="shared-content">
+            <div class="shared-row">
+              <div>
+                <h3 class="a-text">As[ty][tx]</h3>
+                <div id="As" class="matrix"></div>
+              </div>
+              <div>
+                <h3 class="b-text">Bs[ty][tx]</h3>
+                <div id="Bs" class="matrix"></div>
+              </div>
+            </div>
+            <p id="shared-note"></p>
+          </div>
+        </section>
+        <section class="panel code-panel">
+          <div class="section-title">
+            <h2>Inside the kernel</h2>
+            <span>Active operation highlighted</span>
+          </div>
+          <pre id="code"></pre>
+        </section>
+      </div>
+      <section class="stats" id="stats"></section>
+      <section class="notes">
+        <div>
+          <h2>What the animation means</h2>
+          <p id="mode-note"></p>
+          <p>
+            The timeline follows one block; all threads in that block
+            participate. GPU blocks can execute independently, in an unspecified
+            order. This browser simulation does not execute CUDA or predict GPU
+            timing.
+          </p>
+        </div>
+        <div>
+          <h2>Fixes to your example</h2>
+          <p>
+            Remove the apostrophe after <code>Bs[k][threadIdx.x]</code>. Launch
+            exactly <code>dim3 block(TILE, TILE)</code>. Your
+            <code>N / TILE</code> loop requires N to be a multiple of TILE; this
+            version uses ceiling division, zero-padded loads, and a guarded
+            output store.
+          </p>
+          <p>
+            Both barriers must be reached by every thread in the block,
+            including threads outside N. Do not return early before a barrier.
+          </p>
+          <a href="kernels/tiled_matmul.cu" download
+            >Download the corrected CUDA kernel</a
+          >
+          ·
+          <a
+            href="https://docs.nvidia.com/cuda/archive/13.0.3/cuda-c-programming-guide/index.html"
+            target="_blank"
+            rel="noreferrer"
+            >NVIDIA programming guide</a
+          >
+        </div>
+      </section>
+      <section
+        id="register-blocking"
+        class="blocking-embed"
+        aria-label="Register blocking experiment"
+      ></section>
+      <footer>DieScope · Learn the data movement, then optimize.</footer>
+    </main>
+    <script src="assets/js/models/matmul.js"></script>
+    <script src="assets/js/walkthrough.js"></script>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/performance/models.js"></script>
+    <script src="assets/js/core/storage.js"></script>
+    <script src="assets/js/core/session-state.js"></script>
+    <script src="assets/js/core/lab-ui.js"></script>
+    <script src="assets/js/core/module-catalog.js"></script>
+    <script src="assets/js/performance/lab.js"></script>
+    <script src="assets/js/performance/phase2-models.js"></script>
+    <script src="assets/js/performance/diagnosis-data.js"></script>
+    <script src="assets/js/performance/phase3-models.js"></script>
+    <script src="assets/js/performance/blocking.js"></script>
+    <script src="assets/js/performance/notebook-records.js"></script>
+    <script src="assets/js/performance/experiment-adapters.js"></script>
+    <script src="assets/js/performance/notebook-store.js"></script>
+    <script src="assets/js/performance/notebook-service.js"></script>
+    <script>
+      const blockingCleanup = PerformanceLab.modules.blocking.mount(
+        document.getElementById("register-blocking"),
+      );
+      window.addEventListener("pagehide", blockingCleanup);
+    </script>
+  </body>
+</html>

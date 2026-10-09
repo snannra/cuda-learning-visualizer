@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Performance Lab · DieScope</title>
+    <meta
+      name="description"
+      content="Learn how CUDA memory patterns and resource use lead to profiler signals, diagnoses, and optimization choices."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='6' y='6' width='20' height='20' rx='3' fill='%2372e4cf'/%3E%3Cpath d='M10 23V14h3v9m3 0V9h3v14m3 0V17h3v6' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="assets/css/navigation.css" />
+    <link rel="stylesheet" href="assets/css/performance.css" />
+    <link rel="stylesheet" href="assets/css/phase3.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a class="site-brand" href="index.html"
+        ><span class="brand-name"
+          >DIE<span class="brand-slash">/</span>SCOPE</span
+        ><span class="brand-sub">COMPUTER ARCHITECTURE</span></a
+      >
+      <nav class="page-tabs" aria-label="Main navigation">
+        <a href="index.html">Overview</a
+        ><a href="architecture.html">Architecture</a
+        ><a href="matmul.html">Matrix lab</a><a href="grid.html">Grid canvas</a
+        ><a href="performance.html" class="active" aria-current="page"
+          >Performance lab</a
+        >
+      </nav>
+    </header>
+    <main class="performance-shell">
+      <aside class="lab-nav">
+        <a class="lab-home" href="#home">Performance lab</a>
+        <p>Predict. Run. Observe. Explain.</p>
+        <nav aria-label="Performance modules">
+          <a href="#memory">01 · Memory coalescing</a
+          ><a href="#occupancy">02 · Occupancy</a
+          ><a href="#diagnosis">03 · Diagnosis trainer</a
+          ><a href="#scheduler">04 · Warp scheduler</a
+          ><a href="#roofline">05 · Roofline explorer</a
+          ><a href="#mapping">06 · Thread / tile mapping</a
+          ><a href="#blocking">07 · Register blocking</a
+          ><a href="#pipeline">08 · Software pipeline</a
+          ><a href="#tree">09 · Decision tree</a
+          ><a href="#notebook">10 · Experiment notebook</a>
+        </nav>
+        <div class="model-note">
+          <strong>EDUCATIONAL MODELS</strong>
+          <p>
+            Every calculation is conceptual or estimated. Quiz snapshots are
+            synthetic. No real hardware profiler metrics are collected.
+          </p>
+        </div>
+      </aside>
+      <div class="lab-content">
+        <div class="lab-bar">
+          <a href="#home" id="module-back">Back to Performance Lab</a
+          ><span id="module-label">PHASE 1</span>
+        </div>
+        <div id="module-content"></div>
+      </div>
+    </main>
+    <script src="assets/js/performance/models.js"></script>
+    <script src="assets/js/core/storage.js"></script>
+    <script src="assets/js/core/session-state.js"></script>
+    <script src="assets/js/core/lab-ui.js"></script>
+    <script src="assets/js/core/module-catalog.js"></script>
+    <script src="assets/js/performance/lab.js"></script>
+    <script src="assets/js/performance/memory.js"></script>
+    <script src="assets/js/performance/occupancy.js"></script>
+    <script src="assets/js/performance/diagnosis-data.js"></script>
+    <script src="assets/js/performance/diagnosis.js"></script>
+    <script src="assets/js/performance/phase2-models.js"></script>
+    <script src="assets/js/performance/scheduler.js"></script>
+    <script src="assets/js/performance/roofline.js"></script>
+    <script src="assets/js/performance/mapping.js"></script>
+    <script src="assets/js/performance/phase3-models.js"></script>
+    <script src="assets/js/performance/blocking.js"></script>
+    <script src="assets/js/performance/pipeline.js"></script>
+    <script src="assets/js/performance/tree.js"></script>
+    <script src="assets/js/performance/notebook-records.js"></script>
+    <script src="assets/js/performance/experiment-adapters.js"></script>
+    <script src="assets/js/performance/notebook-store.js"></script>
+    <script src="assets/js/performance/notebook-service.js"></script>
+    <script src="assets/js/performance/notebook.js"></script>
+    <script>
+      PerformanceLab.start();
+    </script>
+    <script src="assets/js/navigation.js"></script>
+  </body>
+</html>

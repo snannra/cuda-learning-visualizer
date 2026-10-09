@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>DieScope</title>
+    <meta
+      name="description"
+      content="Interactive explorations of CPU and GPU architecture, CUDA matrix multiplication, and grid geometry."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='6' y='6' width='20' height='20' rx='3' fill='%235ee6bd'/%3E%3Crect x='11' y='11' width='10' height='10' fill='%23090f1a'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="assets/css/landing.css" />
+    <link rel="stylesheet" href="assets/css/navigation.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a class="site-brand" href="index.html"
+        ><span class="brand-name"
+          >DIE<span class="brand-slash">/</span>SCOPE</span
+        ><span class="brand-sub">COMPUTER ARCHITECTURE</span></a
+      >
+      <nav class="page-tabs" aria-label="Main navigation">
+        <a href="index.html" class="active" aria-current="page">Overview</a
+        ><a href="architecture.html">Architecture</a
+        ><a href="matmul.html">Matrix lab</a><a href="grid.html">Grid canvas</a
+        ><a href="performance.html">Performance lab</a>
+      </nav>
+    </header>
+    <main class="landing">
+      <section class="hero">
+        <div>
+          <div class="eyebrow">INTERACTIVE COMPUTER ARCHITECTURE</div>
+          <h1>THE MACHINE.<br /><span>UNDERSTOOD.</span></h1>
+          <p>
+            Explore how processors execute instructions, move data, and multiply
+            matrices. Go from the whole chip to a single operation.
+          </p>
+          <a class="cta" href="architecture.html"
+            >Explore CPU & GPU architecture</a
+          >
+        </div>
+        <div
+          class="hero-diagram"
+          role="img"
+          aria-label="Conceptual diagram: CPU cores and GPU streaming multiprocessors have local caches, and connect through memory systems to external memory."
+        >
+          <div class="diagram-label">
+            TWO PROCESSORS. DIFFERENT ORGANIZATION.
+          </div>
+          <div class="processor-row">
+            <div class="chip">
+              <strong>CPU</strong>
+              <div class="units">
+                <span>Core</span><span>Core</span><span>Core</span
+                ><span>Core</span>
+              </div>
+              <div class="cache-band">Private caches</div>
+              <div class="cache-band">Shared LLC</div>
+            </div>
+            <div class="chip gpu">
+              <strong>GPU</strong>
+              <div class="units">
+                <span>SM</span><span>SM</span><span>SM</span><span>SM</span
+                ><span>SM</span><span>SM</span><span>SM</span><span>SM</span>
+              </div>
+              <div class="cache-band">L1 / shared per SM</div>
+              <div class="cache-band">Shared L2</div>
+            </div>
+          </div>
+          <div class="bus"></div>
+          <div class="memory-band">External memory systems</div>
+          <div class="diagram-caption">
+            Conceptual comparison · each processor has its own memory path.
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="section-heading">
+          <h2>Choose an exploration</h2>
+          <span>Hardware / Execution / Geometry / Performance</span>
+        </div>
+        <div class="explorers">
+          <a class="card" href="architecture.html" style="--accent: #72e4cf"
+            ><span class="number">01 / HARDWARE</span>
+            <h3>Silicon explorer</h3>
+            <p>
+              Open a CPU core or GPU SM and follow the instruction and memory
+              paths.
+            </p>
+            <ul>
+              <li>ALUs, registers, schedulers & caches</li>
+              <li>Warps, threads & shared memory</li>
+              <li>Adjustable models & data-flow traces</li>
+            </ul>
+            <span class="open">Open architecture atlas</span> </a
+          ><a class="card" href="matmul.html" style="--accent: #8bbcff"
+            ><span class="number">02 / EXECUTION</span>
+            <h3>Matrix multiplication</h3>
+            <p>
+              Step through the math and see how CUDA threads cooperate on a
+              tile.
+            </p>
+            <ul>
+              <li>CPU, naive CUDA & tiled CUDA</li>
+              <li>Shared tiles, barriers & register blocking</li>
+              <li>Per-thread operands & running sums</li>
+            </ul>
+            <span class="open">Open matrix walkthrough</span> </a
+          ><a class="card" href="grid.html" style="--accent: #edc47d"
+            ><span class="number">03 / GEOMETRY</span>
+            <h3>Grid explorer</h3>
+            <p>
+              Overlay matrix, block, and tile grids to compare their dimensions.
+            </p>
+            <ul>
+              <li>Infinite canvas with pan & zoom</li>
+              <li>Colored layers & clickable cells</li>
+              <li>Custom sizes, origins & page boundaries</li>
+            </ul>
+            <span class="open">Open grid explorer</span> </a
+          ><a class="card" href="performance.html" style="--accent: #bba8e6"
+            ><span class="number">04 / PERFORMANCE</span>
+            <h3>Performance lab</h3>
+            <p>
+              Connect CUDA behavior to profiler signals, diagnosis, and a
+              controlled next experiment.
+            </p>
+            <ul>
+              <li>Memory, residency &amp; warp scheduling</li>
+              <li>Roofline, register reuse &amp; pipelines</li>
+              <li>Diagnosis practice &amp; local experiment notes</li>
+            </ul>
+            <span class="open">Open performance lab</span>
+          </a>
+        </div>
+      </section>
+      <footer class="footnote">
+        <p>
+          Educational models with labeled simplifications. All explorations run
+          locally in your browser; no GPU or CUDA installation required.
+        </p>
+        <span>DieScope</span>
+      </footer>
+    </main>
+    <script src="assets/js/navigation.js"></script>
+  </body>
+</html>

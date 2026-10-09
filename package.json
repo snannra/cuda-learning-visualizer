@@ -1,0 +1,19 @@
+{
+  "name": "cuda-learning-visualizer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static, dependency-free CPU architecture and CUDA performance visualizations",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node scripts/serve.cjs",
+    "stage": "node scripts/stage-site.cjs",
+    "test": "node scripts/check.cjs",
+    "test:browser": "node scripts/test-browser.cjs",
+    "test:pages": "node scripts/test-browser.cjs --base-path /cuda-learning-visualizer/"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.9"
+  }
+}

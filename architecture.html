@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Silicon Explorer · DieScope</title>
+    <meta
+      name="description"
+      content="Explore CPU cores and GPU streaming multiprocessors through interactive architecture diagrams and memory experiments."
+    />
+    <link rel="stylesheet" href="assets/css/architecture.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='6' y='6' width='20' height='20' rx='3' fill='%235ee6bd'/%3E%3Crect x='11' y='11' width='10' height='10' fill='%23090f1a'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="assets/css/navigation.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a class="site-brand" href="index.html"
+        ><span class="brand-name"
+          >DIE<span class="brand-slash">/</span>SCOPE</span
+        ><span class="brand-sub">COMPUTER ARCHITECTURE</span></a
+      >
+      <nav class="page-tabs" aria-label="Main navigation">
+        <a href="index.html">Overview</a
+        ><a href="architecture.html" class="active" aria-current="page"
+          >Architecture</a
+        ><a href="matmul.html">Matrix lab</a><a href="grid.html">Grid canvas</a
+        ><a href="performance.html">Performance lab</a>
+      </nav>
+    </header>
+    <main>
+      <aside class="left">
+        <h1>Silicon explorer</h1>
+        <p class="lead">Open the chip. Follow the data.</p>
+        <div class="switch">
+          <button id="cpu" class="active">CPU</button
+          ><button id="gpu">GPU</button>
+        </div>
+        <section>
+          <h2>Build your model</h2>
+          <label>Preset configuration<select id="preset"></select></label>
+          <p class="small">Illustrative presets, not exact processor SKUs.</p>
+          <div id="settings"></div>
+          <p class="small">
+            Counts change this schematic. They do not configure real hardware or
+            predict performance.
+          </p>
+        </section>
+        <section>
+          <h2>Follow a process</h2>
+          <label>Walkthrough<select id="flow"></select></label>
+          <div class="playback">
+            <button id="prev">Back</button><button id="play">Play</button
+            ><button id="next">Step</button>
+          </div>
+          <div id="trace" aria-live="polite"></div>
+          <input
+            id="timeline"
+            type="range"
+            min="0"
+            value="0"
+            aria-label="Walkthrough progress"
+          /><button id="reset">Reset trace</button>
+        </section>
+        <section>
+          <h2>Map key</h2>
+          <div class="legend">
+            <span style="--c: #72e4cf">Execution</span
+            ><span style="--c: #8bbcff">Memory</span
+            ><span style="--c: #bba8e6">Control</span
+            ><span style="--c: #edc47d">Current step</span>
+          </div>
+          <p class="small">
+            Use Back or the breadcrumbs to return without resetting. Click the
+            internal units, cache lines, or thread lanes to inspect them. Use
+            Open to drill deeper. Drag the background to pan; scroll or pinch to
+            zoom. Data flow view restores the editable arrow diagram.
+          </p>
+        </section>
+        <details>
+          <summary>Models & source diagrams</summary>
+          <p>
+            CPU: a generic superscalar, out-of-order core, inspired by Intel
+            diagrams. Cache organization varies by processor.
+          </p>
+          <p>
+            GPU: a simplified NVIDIA Ampere-style hierarchy. L1 and shared
+            memory share a physical capacity budget. Counts are illustrative.
+          </p>
+          <a
+            href="https://cdrdv2-public.intel.com/821614/356477-Optimization-Reference-Manual-V2-050.pdf"
+            target="_blank"
+            rel="noreferrer"
+            >Intel optimization manual</a
+          ><a
+            href="https://www.intel.com/content/www/us/en/developer/articles/technical/xeon-processor-scalable-family-technical-overview.html"
+            target="_blank"
+            rel="noreferrer"
+            >Intel cache / chip diagrams</a
+          ><a
+            href="https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf"
+            target="_blank"
+            rel="noreferrer"
+            >NVIDIA A100 diagrams · pp. 20–22</a
+          ><a
+            href="https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/writing-cuda-kernels.html"
+            target="_blank"
+            rel="noreferrer"
+            >NVIDIA shared-memory bank diagrams</a
+          ><a
+            href="https://docs.nvidia.com/cuda/archive/13.0.3/cuda-c-programming-guide/index.html"
+            target="_blank"
+            rel="noreferrer"
+            >CUDA memory & execution model</a
+          >
+        </details>
+      </aside>
+      <section class="canvas-area">
+        <div class="scene-bar">
+          <button
+            id="back-level"
+            aria-label="Back to previous architecture view"
+          >
+            Back</button
+          ><button id="chip-home">Chip overview</button>
+          <div class="view-switch" role="group" aria-label="Architecture view">
+            <button id="hardware-view" class="active" aria-pressed="true">
+              Hardware</button
+            ><button id="flow-view" aria-pressed="false">Data flow</button>
+          </div>
+          <div id="breadcrumbs"></div>
+          <div>
+            <button id="zoom-out" aria-label="Zoom out">−</button
+            ><button id="zoom-in" aria-label="Zoom in">+</button
+            ><button id="fit">Fit</button><button id="focus-unit">Focus</button
+            ><button id="layout">Reset layout</button>
+          </div>
+        </div>
+        <div
+          id="viewport"
+          tabindex="0"
+          aria-label="Architecture graph. Arrow keys pan, plus and minus zoom, F fits."
+        >
+          <div id="world">
+            <svg id="wires" aria-hidden="true"></svg>
+            <div id="nodes"></div>
+          </div>
+          <div class="canvas-hint">
+            Click components · Open to drill down · scroll to zoom
+          </div>
+        </div>
+        <div class="scene-footer">
+          <span id="scene-caption"></span><span id="zoom-label"></span>
+        </div>
+      </section>
+      <aside class="right">
+        <div class="eyebrow">COMPONENT INSPECTOR</div>
+        <h2 id="component-title"></h2>
+        <div id="scope" class="scope"></div>
+        <p id="description"></p>
+        <div id="facts"></div>
+        <button id="open-component" class="primary" hidden>
+          Explore inside
+        </button>
+        <section>
+          <h2>Try it</h2>
+          <div id="experiment"></div>
+        </section>
+        <section>
+          <h2>Keep in mind</h2>
+          <p id="caveat"></p>
+        </section>
+      </aside>
+    </main>
+    <script src="assets/js/architecture-data.js"></script>
+    <script src="assets/js/architecture-hardware.js"></script>
+    <script src="assets/js/architecture.js"></script>
+    <script src="assets/js/navigation.js"></script>
+  </body>
+</html>

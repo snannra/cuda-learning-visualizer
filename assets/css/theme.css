@@ -1,0 +1,1017 @@
+/* Shared black theme. Page-specific layout refinements keep each tool's purpose clear. */
+:root {
+  --bg: #000;
+  --surface: #0a0a0a;
+  --panel: #0a0a0a;
+  --line: #252525;
+  --text: #f4f4f4;
+  --ink: #f4f4f4;
+  --muted: #a0a0a0;
+  --a: #72e4cf;
+  --b: #8bbcff;
+  --c: #edc47d;
+  --green: #72e4cf;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+  background: #000;
+  color: #f4f4f4;
+}
+button,
+input,
+select {
+  border-radius: 2px;
+  box-shadow: none;
+}
+button {
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+button:hover {
+  background: #1b1b1b;
+}
+button.active:hover,
+button.primary:hover {
+  background: #9af0e0;
+  color: #000;
+}
+h1,
+h2,
+h3 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+aside h2,
+.section-title h2 {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+.site-header {
+  height: 80px !important;
+  min-height: 80px;
+  padding: 0 32px !important;
+}
+.site-header .site-brand {
+  font-size: inherit;
+  letter-spacing: 0;
+}
+.site-header .page-tabs {
+  border: 0;
+}
+.site-header .page-tabs a {
+  font-size: 12px;
+  color: #999;
+}
+.site-header .page-tabs a.active {
+  color: #fff;
+}
+/* Landing: large typography and an open, editorial composition. */
+.landing {
+  max-width: 1440px;
+  padding: 72px 48px 32px;
+}
+.hero {
+  grid-template-columns: 1.25fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+}
+.hero h1 {
+  font-size: clamp(44px, 5.8vw, 84px);
+  font-weight: 800;
+  letter-spacing: -2.8px;
+  line-height: 1.04;
+}
+.hero h1 span {
+  color: #fff;
+}
+.hero p {
+  color: #999;
+  font-size: 17px;
+  line-height: 1.7;
+}
+.eyebrow {
+  color: #72e4cf;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+.cta {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #666;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  padding: 15px 22px;
+}
+.cta:hover {
+  background: #fff;
+  color: #000;
+}
+.hero-diagram {
+  border: 0;
+  border-left: 1px solid #333;
+  border-radius: 0;
+  background: transparent;
+  padding: 24px 0 24px 32px;
+}
+.diagram-label {
+  font-size: 11px;
+  color: #777;
+}
+.chip,
+.chip.gpu {
+  background: #080808;
+  border-color: #333;
+  border-radius: 0;
+}
+.chip strong {
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+.chip.gpu strong {
+  color: #fff;
+}
+.chip .units span {
+  background: #111;
+  border-color: #343434;
+  color: #72e4cf;
+}
+.chip.gpu .units span {
+  background: #111;
+  border-color: #343434;
+  color: #8bbcff;
+}
+.cache-band {
+  background: #0b0b0b;
+  border-color: #343434;
+  color: #aaa;
+  border-radius: 0;
+}
+.memory-band {
+  background: #0b0b0b;
+  border-color: #343434;
+  color: #edc47d;
+  border-radius: 0;
+}
+.section-heading {
+  border-top: 1px solid #333;
+  padding-top: 24px;
+}
+.section-heading h2 {
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.section-heading span {
+  font-size: 12px;
+  color: #777;
+}
+.explorers {
+  gap: 0;
+  border: 1px solid #252525;
+}
+.card {
+  border: 0;
+  border-right: 1px solid #252525;
+  background: #080808;
+  border-radius: 0;
+  padding: 32px;
+  transition: background 0.15s;
+}
+.card:last-child {
+  border-right: 0;
+}
+.card:hover {
+  transform: none;
+  background: #111;
+}
+.card h3 {
+  font-size: 27px;
+  font-weight: 500;
+  letter-spacing: -0.6px;
+}
+.card .number {
+  font-size: 11px;
+}
+.card .open {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 11px;
+}
+.card p {
+  font-size: 15px;
+  line-height: 1.7;
+}
+.card ul {
+  font-size: 14px;
+}
+.footnote {
+  font-size: 12px;
+  color: #777;
+}
+/* Architecture: a quieter graph and clearly separated control / inspection rails. */
+body:has(.canvas-area) > main {
+  height: calc(100dvh - 80px);
+  grid-template-columns: 260px minmax(0, 1fr) 300px;
+}
+body:has(.canvas-area) aside {
+  background: #080808;
+  padding: 24px 20px;
+}
+.left h1 {
+  font-size: 23px;
+  letter-spacing: -0.8px;
+}
+.lead {
+  font-size: 13px;
+}
+.switch {
+  background: #000;
+  border: 1px solid #333;
+  padding: 3px;
+  gap: 3px;
+}
+.switch button {
+  border: 0;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 1px;
+  background: transparent;
+  color: #888;
+}
+.switch button.active {
+  background: #fff;
+  color: #000;
+}
+.scene-bar {
+  background: #050505;
+  min-height: 62px;
+  padding: 10px 20px;
+}
+.scene-bar button {
+  font-size: 12px;
+}
+.scene-footer {
+  background: #050505;
+  padding: 11px 20px;
+}
+.canvas-area #viewport {
+  background-color: #000;
+  background-image: radial-gradient(#242424 0.8px, transparent 0.8px);
+  background-size: 26px 26px;
+}
+.node {
+  border-radius: 2px;
+  border-color: #3b3b3b;
+  border-top: 2px solid var(--accent);
+  background: #0b0b0bf5;
+  box-shadow: none;
+  padding: 15px;
+}
+.node.selected {
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.node .kind {
+  font-size: 10px;
+  letter-spacing: 1.3px;
+}
+.node h3 {
+  font-size: 17px;
+  font-weight: 500;
+}
+.node p {
+  color: #999;
+}
+.node .open {
+  border-color: #333;
+  background: transparent;
+  font-size: 11px;
+  padding: 5px 10px;
+}
+.node.traced {
+  background: #201a0e;
+  border-color: #edc47d;
+  box-shadow: 0 0 0 1px #edc47d;
+}
+.canvas-hint {
+  border: 1px solid #252525;
+  border-radius: 2px;
+  background: #080808ed;
+  color: #777;
+  font-size: 11px;
+}
+.scope {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 2px;
+  color: #b0b0b0;
+}
+.result {
+  background: #101010;
+  border-color: #333;
+  border-radius: 2px;
+}
+.lane {
+  border-radius: 1px;
+  background: #102c25;
+}
+.lane.inactive {
+  background: #0d0d0d;
+}
+.cache-slot.hit {
+  background: #102c25;
+}
+.wire {
+  stroke: #454545;
+}
+.wire.active {
+  stroke: #edc47d;
+}
+.right #component-title {
+  font-size: 26px;
+  font-weight: 500;
+}
+.setting-head {
+  font-size: 13px;
+}
+.setting output {
+  font-size: 13px;
+}
+/* Matrix walkthrough: controls sit in a compact band above the working panels. */
+body:has(.matrices) > main {
+  max-width: 1600px;
+  padding: 32px 40px;
+}
+.intro {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 24px;
+}
+.intro h1 {
+  font-size: 32px;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -1px;
+}
+.intro p {
+  font-size: 14px;
+  max-width: 620px;
+  margin: 0;
+}
+.intro + nav {
+  border-bottom: 1px solid #333;
+  gap: 0;
+  padding: 0;
+}
+.intro + nav button {
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #888;
+  border-radius: 0;
+  padding: 14px 20px;
+  font-size: 12px;
+}
+.intro + nav button.active {
+  color: #fff;
+  border-color: #72e4cf;
+}
+.controls {
+  padding: 20px;
+  background: #080808;
+  margin: 20px 0;
+  border: 1px solid #252525;
+  gap: 20px;
+}
+.controls label {
+  font-size: 12px;
+}
+.controls select {
+  min-width: 130px;
+}
+.panel {
+  border-radius: 3px;
+  background: #080808;
+  padding: 24px;
+}
+.workspace {
+  gap: 18px;
+  grid-template-columns: minmax(0, 2.1fr) minmax(320px, 1fr);
+}
+.cell {
+  background: #111;
+  border-color: #303030;
+  border-radius: 1px;
+  color: #b5b5b5;
+}
+.cell.tile {
+  background: #1b1b1b;
+  border-color: #505050;
+}
+.cell.a {
+  background: #102d26;
+  border-color: #72e4cf;
+}
+.cell.b {
+  background: #14243d;
+  border-color: #8bbcff;
+}
+.cell.selected {
+  background: #2c2418;
+  border-color: #edc47d;
+}
+.stat {
+  border-radius: 2px;
+  background: #080808;
+  border-top: 2px solid #343434;
+}
+.stat strong {
+  font-size: 25px;
+  font-weight: 500;
+  color: #fff;
+}
+.code-line.current {
+  background: #10241f;
+  border-color: #72e4cf;
+}
+.sum {
+  border-color: #333;
+}
+.phase {
+  font-size: 22px;
+  color: #fff;
+}
+.notes {
+  border-top: 1px solid #252525;
+  padding-top: 28px;
+}
+.notes h2 {
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.legend {
+  font-size: 12px;
+}
+/* Grid canvas: a slimmer tools rail and neutral graph furniture. */
+body:has(.graph) > main {
+  height: calc(100dvh - 80px);
+}
+body:has(.graph) aside {
+  width: 300px;
+  background: #080808;
+  padding: 24px 20px;
+}
+.graph {
+  background: #000;
+}
+.layer {
+  background: #0d0d0d;
+  border-radius: 2px;
+  border-color: #2b2b2b;
+  padding: 14px;
+}
+.layer-head input[type="text"] {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #333;
+  padding: 5px;
+}
+.toolbar {
+  gap: 0;
+  border: 1px solid #383838;
+}
+.toolbar button {
+  border-radius: 0;
+  border: 0;
+  border-right: 1px solid #383838;
+  background: #0b0b0b;
+  box-shadow: none;
+}
+.toolbar button:last-child {
+  border-right: 0;
+}
+.status,
+.coordinates {
+  border-radius: 2px;
+  background: #090909ed;
+  border: 1px solid #252525;
+  color: #999;
+  font-size: 11px;
+}
+#inspection {
+  color: #edc47d;
+}
+@media (max-width: 1100px) {
+  body:has(.canvas-area) > main {
+    grid-template-columns: 240px minmax(0, 1fr);
+    height: auto;
+    min-height: calc(100dvh - 80px);
+  }
+  .left,
+  .canvas-area {
+    height: calc(100dvh - 80px);
+  }
+  .hero {
+    gap: 30px;
+  }
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+  .intro {
+    display: block;
+  }
+  .intro p {
+    margin-top: 12px;
+  }
+  .card {
+    padding: 24px;
+  }
+  .landing {
+    padding: 50px 30px 30px;
+  }
+}
+@media (max-width: 900px) {
+  .explorers {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    border-right: 0;
+    border-bottom: 1px solid #252525;
+  }
+  .card:last-child {
+    border-bottom: 0;
+  }
+}
+@media (max-width: 650px) {
+  .site-header {
+    height: 112px !important;
+    min-height: 112px;
+    padding: 14px 16px 0 !important;
+  }
+  .site-header .page-tabs a {
+    font-size: 10px;
+  }
+  .landing {
+    padding: 35px 20px;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-bottom: 44px;
+  }
+  .hero h1 {
+    font-size: 46px;
+    letter-spacing: -1.8px;
+  }
+  .hero-diagram {
+    border-left: 0;
+    border-top: 1px solid #333;
+    padding: 24px 0 0;
+  }
+  .section-heading {
+    display: block;
+  }
+  .section-heading span {
+    margin-top: 8px;
+  }
+  body:has(.matrices) > main {
+    padding: 24px 14px;
+  }
+  .intro h1 {
+    font-size: 29px;
+  }
+  .controls {
+    padding: 14px;
+    gap: 12px;
+  }
+  .controls label {
+    min-width: 125px;
+  }
+  .panel {
+    padding: 16px;
+  }
+  .intro + nav button {
+    padding: 12px 8px;
+    font-size: 11px;
+  }
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+  body:has(.canvas-area) > main {
+    display: flex;
+    height: auto;
+    min-height: calc(100dvh - 112px);
+  }
+  body:has(.canvas-area) .left {
+    height: auto;
+    max-height: 330px;
+  }
+  .canvas-area {
+    height: 65dvh;
+  }
+  .right {
+    height: auto;
+    max-height: none;
+  }
+  body:has(.graph) > main {
+    height: calc(100dvh - 112px);
+    min-height: 500px;
+  }
+  body:has(.graph) aside {
+    width: 100%;
+    height: 38%;
+    padding: 16px;
+  }
+  .graph {
+    min-height: 250px;
+  }
+}
+/* DieScope's hardware view is a logical floorplan, with interactive substructures. */
+.view-switch {
+  display: flex;
+  border: 1px solid #383838;
+  gap: 0;
+}
+.view-switch button {
+  border: 0;
+  background: transparent;
+  padding: 7px 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 10px;
+}
+.view-switch button.active {
+  background: #eee;
+  color: #000;
+}
+.scene-bar {
+  gap: 10px;
+}
+.scene-bar #breadcrumbs {
+  flex: 1;
+}
+.hardware-mode {
+  background-image: none !important;
+  background-color: #020202 !important;
+}
+.silicon-die {
+  border: 2px solid #555;
+  background: #101310;
+  background-image:
+    linear-gradient(#ffffff03 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff03 1px, transparent 1px);
+  background-size: 12px 12px;
+  box-shadow:
+    0 0 0 8px #151515,
+    0 0 0 10px #333,
+    inset 0 0 0 16px #090909;
+}
+.silicon-die:before {
+  content: "DIESCOPE / LOGICAL SILICON MAP";
+  position: absolute;
+  top: 22px;
+  left: 48px;
+  font:
+    12px ui-monospace,
+    monospace;
+  letter-spacing: 2px;
+  color: #879185;
+}
+.hardware-node {
+  background: #0a100df5;
+  border: 1px solid #44504a;
+  border-top: 2px solid var(--accent);
+  border-radius: 0;
+  box-shadow: none !important;
+  cursor: pointer;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.hardware-node:hover {
+  background: #152019;
+  border-color: var(--accent);
+}
+.hardware-node.selected {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.hardware-node.traced {
+  outline: 3px solid #edc47d;
+  background: #292315;
+}
+.hardware-node .kind {
+  display: none;
+}
+.hardware-node h3 {
+  font-size: 16px;
+  margin: 0 0 3px;
+  line-height: 1.2;
+}
+.hardware-node p {
+  font-size: 11px;
+  line-height: 1.3;
+  min-height: 16px;
+  margin: 0 0 8px;
+  color: #adb6ae;
+}
+.hardware-node .open {
+  margin-top: auto;
+  align-self: flex-start;
+  font-size: 10px;
+  padding: 3px 8px;
+  background: #0a0a0a;
+}
+.hardware-art {
+  flex: 1;
+  min-height: 0;
+  margin: 2px 0 8px;
+  gap: 4px;
+  display: grid;
+}
+.hardware-hotspot {
+  font:
+    10px/1.1 ui-monospace,
+    monospace;
+  color: var(--accent);
+  padding: 4px 2px;
+  border: 1px solid #4e675654;
+  background: #1a2a20;
+  border-radius: 0;
+  min-width: 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+.hardware-hotspot:hover {
+  background: #30463a;
+  border-color: var(--accent);
+}
+.unit-floorplan {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 26px 1fr 26px;
+}
+.unit-floorplan .hardware-hotspot:first-child,
+.unit-floorplan .hardware-hotspot:last-child {
+  grid-column: 1/-1;
+}
+.unit-floorplan .hardware-hotspot:nth-child(3) {
+  background: repeating-linear-gradient(90deg, #184e3b 0 8px, #0c271b 8px 10px);
+}
+.unit-floorplan .hardware-hotspot:nth-child(2) {
+  background: repeating-linear-gradient(0deg, #264232 0 4px, #111d16 4px 6px);
+}
+.cache-array {
+  grid-template-rows: repeat(8, 1fr);
+  gap: 3px;
+}
+.visual-cache-line {
+  display: grid;
+  grid-template-columns: 18px 32px 1fr;
+  gap: 3px;
+  align-items: center;
+  padding: 1px 4px;
+  background: #102037;
+  min-height: 9px;
+}
+.visual-cache-line span {
+  font-size: 8px;
+}
+.visual-tag {
+  background: #213b53;
+  border-right: 1px solid #8bbcff66;
+}
+.visual-data {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  height: 100%;
+  gap: 2px;
+}
+.visual-data i {
+  background: #436b8c80;
+  min-height: 5px;
+}
+.visual-cache-line.resident {
+  background: #163e2c;
+}
+.visual-cache-line.resident .visual-tag {
+  background: #286045;
+}
+.visual-cache-line.recent {
+  outline: 1px solid #edc47d;
+}
+.register-array {
+  grid-template-columns: repeat(4, 1fr);
+}
+.register-array button {
+  background: #1d293a;
+  color: #8bbcff;
+  border-color: #56687c55;
+}
+.thread-array {
+  grid-template-columns: repeat(8, 1fr);
+}
+.thread-array .inactive {
+  background: #101510;
+  color: #4d594f;
+  border-color: #29332b;
+}
+.shared-array {
+  grid-template-columns: repeat(8, 1fr);
+}
+.shared-array button {
+  background: #253d44;
+  color: #9fd9e8;
+}
+.execution-array {
+  grid-template-columns: repeat(4, 1fr);
+  align-items: stretch;
+}
+.execution-cell {
+  clip-path: polygon(
+    0 0,
+    45% 0,
+    50% 20%,
+    55% 0,
+    100% 0,
+    100% 45%,
+    65% 100%,
+    35% 100%,
+    0 45%
+  );
+  background: #236047;
+  color: #d3fff0;
+  border: 0;
+  padding: 12px 0;
+  min-height: 34px;
+}
+.dram-array {
+  grid-template-columns: repeat(2, 1fr);
+}
+.dram-bank {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background: #182423;
+  padding: 5px;
+  font-size: 8px;
+  color: #9ab8b5;
+}
+.dram-bank i {
+  display: block;
+  width: 100%;
+  height: 5px;
+  background: repeating-linear-gradient(90deg, #527575 0 2px, #172626 2px 4px);
+}
+.fabric-array {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 24px;
+}
+.fabric-array button {
+  flex: 1;
+  color: #bba8e6;
+  background: #272033;
+  position: relative;
+}
+.queue-array {
+  grid-template-columns: repeat(4, 1fr);
+}
+.queue-array button {
+  background: #29203a;
+  color: #d6c5f4;
+}
+.silicon-die .hardware-node[data-id="fabric"] h3 {
+  font-size: 13px;
+}
+.silicon-die .hardware-node[data-id="fabric"] p {
+  display: none;
+}
+.cache-byte-view {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 3px;
+  margin-top: 10px;
+}
+.cache-byte-view button {
+  font:
+    9px ui-monospace,
+    monospace;
+  padding: 5px 1px;
+  min-width: 0;
+  background: #0d1a28;
+  color: #8bbcff;
+  border: 1px solid #304251;
+}
+.cache-byte-view button.active {
+  background: #edc47d;
+  color: #000;
+}
+.byte-caption {
+  font:
+    11px/1.6 ui-monospace,
+    monospace;
+  color: #a0a0a0;
+  margin-top: 8px;
+}
+.cache-array.large-cache {
+  gap: 7px;
+}
+.large-cache .visual-cache-line {
+  padding: 6px;
+  grid-template-columns: 26px 70px 1fr;
+}
+.large-cache .visual-cache-line span {
+  font-size: 12px;
+}
+.large-cache .visual-data {
+  grid-template-columns: repeat(8, 1fr);
+}
+.large-cache .visual-data i {
+  min-height: 15px;
+}
+.cache-slot {
+  cursor: pointer;
+}
+.cache-slot:hover {
+  border-color: #8bbcff;
+}
+
+.hardware-node.external-memory {
+  border: 1px dashed #7a9996;
+  background: #0b1111;
+}
+.hardware-node.external-memory .kind {
+  display: block;
+  color: #98b9b4;
+  font-size: 9px;
+}
+.hardware-node.external-memory .kind:after {
+  content: " / OFF-CHIP STORAGE";
+}
+.silicon-die:before {
+  content: "DIESCOPE / LOGICAL HARDWARE MAP";
+}
+.context-resource {
+  border-style: dashed !important;
+  background: #101014 !important;
+}
+.context-badge {
+  font:
+    9px/1.5 ui-monospace,
+    monospace;
+  letter-spacing: 0.6px;
+  color: #edc47d;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #4b4030;
+  padding-bottom: 4px;
+}
+.hardware-node.context-resource .context-badge {
+  font-size: 8px;
+}
+.scene-bar #back-level {
+  border-color: #666;
+  color: #fff;
+}
+.scene-bar #chip-home {
+  font-size: 11px;
+}
+.scene-bar #back-level:disabled,
+.scene-bar #chip-home:disabled {
+  opacity: 0.3;
+}
+.context-resource .hardware-art {
+  opacity: 0.8;
+}
+
+.explorers {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+@media (max-width: 1200px) {
+  .explorers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .card:nth-child(2) {
+    border-right: 0;
+  }
+  .card:nth-child(-n + 2) {
+    border-bottom: 1px solid #252525;
+  }
+}
+@media (max-width: 900px) {
+  .explorers {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    border-right: 0;
+  }
+}

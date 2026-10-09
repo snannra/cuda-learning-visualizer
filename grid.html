@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Grid Explorer · DieScope</title>
+    <link rel="stylesheet" href="assets/css/grid.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101b2b'/%3E%3Cpath d='M8 0v32M24 0v32M0 8h32M0 24h32' stroke='%235ee6bd' stroke-width='3'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="assets/css/navigation.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a class="site-brand" href="index.html"
+        ><span class="brand-name"
+          >DIE<span class="brand-slash">/</span>SCOPE</span
+        ><span class="brand-sub">COMPUTER ARCHITECTURE</span></a
+      >
+      <nav class="page-tabs" aria-label="Main navigation">
+        <a href="index.html">Overview</a
+        ><a href="architecture.html">Architecture</a
+        ><a href="matmul.html">Matrix lab</a
+        ><a href="grid.html" class="active" aria-current="page">Grid canvas</a
+        ><a href="performance.html">Performance lab</a>
+      </nav>
+    </header>
+    <main>
+      <aside>
+        <div class="heading">
+          <h2>Layers & legend</h2>
+          <button id="add">+ Grid</button>
+        </div>
+        <p>
+          Compare matrix extents, output blocks, and tiles. Dimensions are
+          columns × rows.
+        </p>
+        <div id="layers"></div>
+        <section>
+          <h2>Page boundary</h2>
+          <label class="check"
+            ><input id="bounded" type="checkbox" checked /> Show finite
+            page</label
+          >
+          <div class="fields">
+            <label
+              >Width<input
+                id="page-w"
+                type="number"
+                min="1"
+                max="1000000"
+                value="64" /></label
+            ><label
+              >Height<input
+                id="page-h"
+                type="number"
+                min="1"
+                max="1000000"
+                value="64"
+            /></label>
+          </div>
+          <button id="fit">Fit page / layers</button>
+          <p>
+            The boundary is a visual guide. Pan beyond it freely; repeated
+            layers stop at the page edge when enabled.
+          </p>
+        </section>
+        <section>
+          <h2>Cell inspection</h2>
+          <div id="inspection" aria-live="polite">
+            Click the graph to inspect a cell.
+          </div>
+          <button id="clear">Clear selected cells</button>
+          <p>
+            Click toggles a cell mark. Drag to pan. Scroll to zoom around the
+            pointer. Touch: drag or pinch. Keyboard: arrows pan, + / − zoom, F
+            fits.
+          </p>
+        </section>
+        <section>
+          <h2>Reading CUDA grids</h2>
+          <p>
+            A matrix layer shows the whole output. Block and tile layers each
+            show one bounded grid, overlaid on the matrix to compare their
+            sizes. Repetition is optional and off by default; these are
+            geometric comparisons, not a CUDA execution simulation.
+          </p>
+          <p>
+            For the walkthrough kernel, block dimensions equal TILE × TILE.
+            Other kernels can assign multiple output elements per thread.
+          </p>
+        </section>
+      </aside>
+      <div class="graph" id="graph">
+        <canvas
+          id="canvas"
+          tabindex="0"
+          aria-label="Infinite grid graph. Arrow keys pan, plus and minus zoom, F fits. Click cells to inspect."
+        ></canvas>
+        <div class="toolbar">
+          <button id="minus" aria-label="Zoom out">−</button
+          ><button id="plus" aria-label="Zoom in">+</button
+          ><button id="origin">Origin</button><button id="fit-top">Fit</button>
+        </div>
+        <div class="status" id="status"></div>
+        <div class="coordinates" id="coordinates">
+          x = column · y = row (downward)
+        </div>
+      </div>
+    </main>
+    <script src="assets/js/grid.js"></script>
+    <script src="assets/js/navigation.js"></script>
+  </body>
+</html>
